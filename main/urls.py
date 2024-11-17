@@ -21,6 +21,10 @@ from django.urls import include
 from Accounts import urls
 from django.conf import settings
 from rest_framework import permissions
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 
 urlpatterns = [
@@ -28,6 +32,11 @@ urlpatterns = [
     path('api/', include(urls)),
     # Schema generation endpoint
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+
+    
+    # Refresh token
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # Swagger UI
     path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),

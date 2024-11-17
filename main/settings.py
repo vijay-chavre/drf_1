@@ -40,12 +40,17 @@ INSTALLED_APPS = [
     'rest_framework',
     'Accounts',
     'drf_spectacular',
+    'rest_framework_simplejwt',
 ]
 INSTALLED_APPS += ['debug_toolbar']
 INSTALLED_APPS += ['django_extensions']
 REST_FRAMEWORK = {
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
+AUTH_USER_MODEL = 'accounts.User'  # Replace with your custom  User model
 
 INTERNAL_IPS = [
     "127.0.0.1",  # Add localhost IP
